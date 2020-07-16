@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.accp.dao.UserMapper">
+
+    <select id="getUsers"  resultType="cn.accp.pojo.User">
+        SELECT u.id,u.userName,u.userPassword,u.gender FROM smbms_user u
+    </select>
+
+    <!--User getUserById();-->
+    <select id="getUserById" resultType="cn.accp.pojo.User">
+        SELECT u.id,u.userName,u.userPassword,u.gender
+        FROM smbms_user u
+        <trim prefix="where"  prefixOverrides="and" >
+            <if test="id != null">
+                u.id = #{id}
+            </if>
+            <if test="userName != null and userName !=''">
+                And   u.userName = #{userName}
+            </if>
+        </trim>
+    </select>
+</mapper> 
